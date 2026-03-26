@@ -1,0 +1,36 @@
+services:
+  web:
+    build: ./backend
+    container_name: sales-order-inventory-web
+    command: ./docker-entrypoint.sh
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_DB: sales_order_inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    container_name: sales-order-inventory-db
+    environment:
+      POSTGRES_DB: sales_order_inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d sales_order_inventory"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

@@ -1,0 +1,263 @@
+{
+  "info": {
+    "name": "Sales Order Inventory API",
+    "_postman_id": "d4b8f4b1-1d07-4d56-8de0-9e9e4f1760c1",
+    "description": "Postman collection for the Sales Order & Inventory Lite assignment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "product_id",
+      "value": "1"
+    },
+    {
+      "key": "dealer_id",
+      "value": "1"
+    },
+    {
+      "key": "order_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/products/"
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sku\": \"BP-001\",\n  \"name\": \"Brake Pad\",\n  \"description\": \"Front brake pad set\",\n  \"unit_price\": \"500.00\",\n  \"is_active\": true\n}"
+            },
+            "url": "{{base_url}}/api/products/"
+          }
+        },
+        {
+          "name": "Get Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/products/{{product_id}}/"
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sku\": \"BP-001\",\n  \"name\": \"Brake Pad Premium\",\n  \"description\": \"Updated brake pad description\",\n  \"unit_price\": \"550.00\",\n  \"is_active\": true\n}"
+            },
+            "url": "{{base_url}}/api/products/{{product_id}}/"
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{base_url}}/api/products/{{product_id}}/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dealers",
+      "item": [
+        {
+          "name": "List Dealers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/dealers/"
+          }
+        },
+        {
+          "name": "Create Dealer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"ABC001\",\n  \"name\": \"ABC Motors\",\n  \"email\": \"abc@example.com\",\n  \"phone\": \"9999999999\",\n  \"address\": \"Mumbai\",\n  \"is_active\": true\n}"
+            },
+            "url": "{{base_url}}/api/dealers/"
+          }
+        },
+        {
+          "name": "Get Dealer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/dealers/{{dealer_id}}/"
+          }
+        },
+        {
+          "name": "Update Dealer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"ABC001\",\n  \"name\": \"ABC Motors Updated\",\n  \"email\": \"abc@example.com\",\n  \"phone\": \"9999999999\",\n  \"address\": \"Mumbai, Maharashtra\",\n  \"is_active\": true\n}"
+            },
+            "url": "{{base_url}}/api/dealers/{{dealer_id}}/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "List Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/orders/"
+          }
+        },
+        {
+          "name": "Create Draft Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dealer\": {{dealer_id}},\n  \"items\": [\n    {\n      \"product_id\": {{product_id}},\n      \"quantity\": 10\n    }\n  ]\n}"
+            },
+            "url": "{{base_url}}/api/orders/"
+          }
+        },
+        {
+          "name": "Get Order",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/orders/{{order_id}}/"
+          }
+        },
+        {
+          "name": "Update Draft Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dealer\": {{dealer_id}},\n  \"items\": [\n    {\n      \"product_id\": {{product_id}},\n      \"quantity\": 8\n    }\n  ]\n}"
+            },
+            "url": "{{base_url}}/api/orders/{{order_id}}/"
+          }
+        },
+        {
+          "name": "Confirm Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{base_url}}/api/orders/{{order_id}}/confirm/"
+          }
+        },
+        {
+          "name": "Deliver Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{base_url}}/api/orders/{{order_id}}/deliver/"
+          }
+        },
+        {
+          "name": "Order Summary Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/orders/summary/"
+          }
+        },
+        {
+          "name": "Order Summary Report Filtered",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/orders/summary/?status=confirmed&dealer={{dealer_id}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "List Inventory",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/inventory/"
+          }
+        },
+        {
+          "name": "Adjust Inventory",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"adjustment_quantity\": 25,\n  \"updated_by\": \"admin.user\"\n}"
+            },
+            "url": "{{base_url}}/api/inventory/{{product_id}}/"
+          }
+        }
+      ]
+    }
+  ]
+}
