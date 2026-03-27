@@ -396,6 +396,4 @@ Completed:
 - React frontend
 - Docker setup
 
-Pending:
 
-- final submission push
